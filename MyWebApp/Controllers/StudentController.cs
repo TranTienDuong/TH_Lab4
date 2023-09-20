@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWebApp.Models;
 namespace MyWebApp.Controllers
 {
-    [Route("Admin/Student")]
+
     public class StudentController : Controller
     {
         private List<Student> listStudents = new List<Student>();
@@ -30,14 +30,16 @@ namespace MyWebApp.Controllers
 
             };
         }
-        [HttpGet("List")]
+        [HttpGet]
+        [Route("/Admin/Student/List", Name = "list")]
         public IActionResult Index()
         {
             //Trả về View Index.cshtml cùng Model là danh sách sv listStudents
             return View(listStudents);
         }
 
-        [HttpGet("Add")]
+        [HttpGet]
+        [Route("Admin/Student/Add", Name = "add")]
         public IActionResult Create()
         {
             //lấy danh sách các giá trị Gender để hiển thị radio button trên form
@@ -53,7 +55,8 @@ namespace MyWebApp.Controllers
             };
             return View();
         }
-        [HttpPost("Add")]
+        [HttpPost]
+        [Route("Admin/Student/Add")]
         public IActionResult Create(Student s)
         {
             s.Id = listStudents.Last<Student>().Id + 1;
