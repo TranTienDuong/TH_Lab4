@@ -48,20 +48,33 @@ namespace MyWebApp.Controllers
             //Để hiển thị select-option trên View cần dùng List<SelectListItem>
             ViewBag.AllBranches = new List<SelectListItem>()
             {
+                new SelectListItem { Text = "IT", Value = "1" },
+                new SelectListItem { Text = "BE", Value = "2" },
+                new SelectListItem { Text = "CE", Value = "3" },
+                new SelectListItem { Text = "EE", Value = "4" }
+            };
+            return View();
+
+        }
+        [HttpPost("Admin/Student/Add")]
+        [Route("Admin/Student/Add")]
+        public async Task<IActionResult> Create(Student s)
+        {
+            if (ModelState.IsValid)
+            {
+                s.Id = listStudents.Last<Student>().Id + 1;
+                listStudents.Add(s);
+                return View("Index", listStudents);
+            }
+            ViewBag.AllGenders = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
+            ViewBag.AllBranches = new List<SelectListItem>()
+            {
             new SelectListItem { Text = "IT", Value = "1" },
             new SelectListItem { Text = "BE", Value = "2" },
             new SelectListItem { Text = "CE", Value = "3" },
             new SelectListItem { Text = "EE", Value = "4" }
             };
             return View();
-        }
-        [HttpPost]
-        [Route("Admin/Student/Add")]
-        public IActionResult Create(Student s)
-        {
-            s.Id = listStudents.Last<Student>().Id + 1;
-            listStudents.Add(s);
-            return View("Index", listStudents);
         }
     }
 }
