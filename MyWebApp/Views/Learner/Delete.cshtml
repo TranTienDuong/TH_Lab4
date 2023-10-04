@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@model Learner
+<h1>Delete</h1>
+<div>
+    <h3>Are you sure you want to delete this learner?</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Tên</th>
+                <th>Họ</th>
+                <th>Ngày Nhập Học</th>
+            </tr>
+        </thead>
+        <tbody>           
+                <tr>
+                    <td>@Model.LearnerID</td>
+                    <td>@Model.FirstMidName</td>
+                    <td>@Model.LastName</td>
+                    <td>@Model.EnrollmentDate</td>
+                </tr>
+        </tbody>
+    </table>
+    <form asp-controller="Learner" asp-action="Delete" method="post" class="mt-3">
+        <input type="hidden" asp-for="LearnerID" />
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
